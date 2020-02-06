@@ -1,4 +1,9 @@
 #pi setup - source this file
+#check working directory is correct
+if(!fs::file_exists("pi_setup.Rproj")){
+  stop("Working directory should be pi_setup.Rproj directory")
+}
+
 library("glue")
 
 #### configuration ####
@@ -16,7 +21,7 @@ wd <- getwd()
 # for leaf scanner 
 
 scanner_desktop <- glue("[Desktop Entry]
-Name=Svalbard Traits
+Name=Scan leaves
 Comment=Setup for Svalbard Traits course leaf scanning
 Exec={wd}/leaf_scans.sh
 Icon={wd}/figures/leaf_clip_art_thumb.png
