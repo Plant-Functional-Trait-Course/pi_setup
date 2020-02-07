@@ -84,6 +84,9 @@ done ")
 
 writeLines(leaf_scan.sh, con = "leaf_scan.sh")
 
+#set permissions
+fs::file_chmod("run_filename_check.sh", mode = "u+x")
+fs::file_chmod("leaf_scan.sh", mode = "u+x")
 
 
 #### xsane config?? ####
