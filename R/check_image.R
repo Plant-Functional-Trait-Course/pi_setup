@@ -29,7 +29,7 @@ check_image <- function(pathfile, check_ij = TRUE){
   }
   file_base <- gsub("(^[A-Z]{3}\\d{4}).*", "\\1", file)
 
-  envelope_codes <- readRDS("envelope_codes.RDS")# import all_codes  
+  all_codes <- readRDS("envelope_codes.RDS")# import all_codes  
 
   if(!file_base %in% all_codes$hashcode){
     stop2(paste0("File name ", file, " not in list of permitted names"))
