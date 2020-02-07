@@ -1,6 +1,6 @@
 main <- function(){
   x <- readLines("stdin")
-  source("check_image.R")
+  source("R/check_image.R")
   cat("\n\n\n")
   x <- strsplit(x, split = " ")[[1]][3]
 

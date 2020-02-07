@@ -1,5 +1,5 @@
 main <- function(){
-  files <- list.files(path = "~/Desktop/Svalbard_leaves")
+  files <- list.files(path = "~/Desktop/leaf_scans")
 
     # check extension
     wrong_extension <- !grepl("([^\\s]+(\\.(jpg|jpeg))$)", files, ignore.case = TRUE)
