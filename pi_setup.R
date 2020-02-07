@@ -22,8 +22,8 @@ wd <- getwd()
 
 scanner_desktop <- glue("[Desktop Entry]
 Name=Scan leaves
-Comment=Setup for Svalbard Traits course leaf scanning
-Exec={wd}/leaf_scans.sh
+Comment=Setup for Plant Functional Trait Course leaf scanning
+Exec={wd}/leaf_scan.sh
 Icon={wd}/figures/leaf_clip_art_thumb.png
 Terminal=true
 Type=Application")
