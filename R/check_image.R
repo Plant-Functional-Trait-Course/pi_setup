@@ -6,7 +6,7 @@ check_image <- function(pathfile, check_ij = TRUE){
   file <- basename(pathfile)  
   
   stop2 <- function(msg) {
-    x11()
+    x11(height = 10, width = 10, canvas = "pink")
     plot(1, 1, type = "n", axes = FALSE, xlab = "", ylab = "")
     title(main = paste(strwrap(msg, width = 30), collapse = "\n"), col.main = "red", line = -1)
     locator(1)
