@@ -24,7 +24,7 @@ main <- function(){
     #check names valid
     file_base <- gsub("(^[A-Z]{3}\\d{4}).*", "\\1", files)
     
-    load("envelope_codes.Rdata")# loads codes  
+    all_codes <- readRDS("envelope_codes.RDS")# loads codes  
     
     invalid_name <- !file_base %in% all_codes$hashcode
     if(any(invalid_name)){
