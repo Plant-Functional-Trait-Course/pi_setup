@@ -7,7 +7,8 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
@@ -31,15 +32,16 @@ sudo apt update
 sudo apt full-upgrade
 ```
 
-Install `xsane`, `inotifywait`, and `R`. 
+Install `xsane`, `inotifywait`, `R`, and `curl`. 
 
 ```{bash, eval = FALSE}
 sudo apt-get install sane sane-utils libsane-extras xsane
 sudo apt-get install inotify-tools
 sudo apt-get install r-base r-base-core r-base-dev
+sudo apt-get install libcurl4-openssl-dev
 ```
 
-`xsane` controls the scanner, `inotifywait` watches for new files in the image directory (made below) and `R` validates the image file name and quality.
+`xsane` controls the scanner, `inotifywait` watches for new files in the image directory (made below) and `R` validates the image file name and quality. `curl` is required by the `exifr` `R` package.
 
 From the desktop, click on the raspberry (top left), then Preferences >> Raspberry Pi Configuration >> Interfaces and enable VNC and optionally SSH (SSH is useful when connecting to the pi with a phone).
 
@@ -55,17 +57,21 @@ Install the following packages
 - `remotes`
 - `PFTCFunctions` (with `remotes::install_github("Plant-Functional-Trait-Course/PFTCFunctions", upgrade = FALSE)`)
 
-Some of these take a VERY long time to install from source on the Pis. It would be worth exploring installing binaries
+Some of these take a VERY long time to install from source on the Pis. It would be worth exploring installing binaries, especially for `dplyr` and `tidyr`.
 
 ## Run the setup script
 
 Open the terminal and clone the `pi_setup` repo from github.com to the Pi with
 
-`git clone https://github.com/Plant-Functional-Trait-Course/pi_setup.git`
+```{bash}
+git clone https://github.com/Plant-Functional-Trait-Course/pi_setup.git
+```
 
 This will make a directory called `pi_setup`. Move into this folder with
 
-`cd pi_setup`
+```{bash}
+cd pi_setup
+```
 
 The `pi_setup.R` script creates the desktop icons and associated bash scripts that start the scanner and check if the files names are valid. 
 
@@ -82,13 +88,23 @@ Save, and then run
 source("pi_setup.R")
 ```
 
+If there are no errors, you can quit `R`.
+
+```{r, eval = FALSE}
+q(save = "no")
+```
+
 Run the leaf icon on the desktop, and test the system works by saving a scan with a valid name.
 
 ## IP addresses
 
-Find the IP address of the pi with `ifconfig`
+Set static ethernet and USB IP address (this might cause conflicts if you are using ethernet to connect to the internet, but is very convenient when using VNC to connect to laptops (ethernet) or phone (USB).
 
-Set the USB IP address, for convenience when connecting by phone by a USB cable.
+Right click on the wifi icon at the top left of the screen, then select Wireless & Wired Network Services.
+
+In the menu, select `eth0` in the top right drop-down box, then write in the desired IPv4 Address. IPv4 address should have a format like `192.168.42.42`. Repeat for `usb0` (you will probably need a phone connected by usb to see this option).
+
+Setting static IP adress might make it difficult to connect to a ethernet network.
 
 ## Details
 
@@ -103,8 +119,26 @@ Run `scan leaf` desktop icon and wait for `xsane` to open. Set
 - The scan type to colour
 - Resolution to 300
 
-Quit using the File >> Quit (`xsane` should then remember these settings)
+Quit using the File >> Quit (`xsane` should then remember these settings).
+
+It is 
+
+## Laptop set-up
+
+Download and install the VNC viewer from [https://www.realvnc.com/en/connect/download/viewer/](https://www.realvnc.com/en/connect/download/viewer/)
+
+Connect to the Pi with an ethernet cable and open VNC viewer. Enter the IP address to connect. You can now see the Pi desktop on your screen, and control the Pi with your keyboard and mouse/touchpad.
+
+## Phone set-up
+
+Being able to connect the pi to a phone by USB cable is sometimes convenient to check the pi are happy.
+
+Install the VNC Viewer - Remote Desktop app by RealVNC Limited.
+
+The VX ConnectBot by Martin Matuska allows SSH to connect to the pi as an alternative to VNC. This gives a command line interface is quite useful given the limited screen size.
+
+Plug the phone into the pi with a USB-micro-USB cable (the phones charging cable is fine). Next, enable USB tethering in the phone's hotspot menu. This step is easy to forget - but the next step won't work without it. Now open VNC or VX ConnectBot and follow instructions. You will need the IP address.
 
 ## Test and clone
 
-When everything is working, clone the SD cards (keep one as backup).
+When everything is working, clone the SD cards (keep one SD card as backup).
