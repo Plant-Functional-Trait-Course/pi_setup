@@ -14,7 +14,9 @@ Set up the Pi
 
 Download the raspberian image from <https://www.raspberrypi.org/downloads/raspbian/> and follow [installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to write the image to the Pi's SD card.
 
-Then run
+The first time you run the pi you need a screen (connect with an MDVI cable) and an external USB keyboard and mouse. Start the pi by plugging in the power and follow the instructions for a first time setup. It will ask you to set a password - you will need this later with the VNC viewer.
+
+Next open the terminal (ctrl-alt-t or use the menu) and then run
 
 ``` bash
 sudo apt update
@@ -34,23 +36,8 @@ sudo apt-get install libcurl4-openssl-dev
 
 From the desktop, click on the raspberry (top left), then Preferences &gt;&gt; Raspberry Pi Configuration &gt;&gt; Interfaces and enable VNC and optionally SSH (SSH is useful when connecting to the pi with a phone).
 
-Set up R
---------
-
-Install the following packages
-
--   `dplyr`
--   `tidyr`
--   `fs`
--   `glue`
--   `exifr`
--   `remotes`
--   `PFTCFunctions` (with `remotes::install_github("Plant-Functional-Trait-Course/PFTCFunctions", upgrade = FALSE)`)
-
-Some of these take a VERY long time to install from source on the Pis. It would be worth exploring installing binaries, especially for `dplyr` and `tidyr`.
-
-Run the setup script
---------------------
+Install the setup script
+------------------------
 
 Open the terminal and clone the `pi_setup` repo from github.com to the Pi with
 
@@ -64,14 +51,38 @@ This will make a directory called `pi_setup`. Move into this folder with
 cd pi_setup
 ```
 
+Set up R
+--------
+
+Open R from the terminal by typing R
+
+``` bash
+R
+```
+
+Install the following packages
+
+-   `dplyr`
+-   `tidyr`
+-   `fs`
+-   `glue`
+-   `exifr`
+-   `remotes`
+-   `PFTCFunctions` (with `remotes::install_github("Plant-Functional-Trait-Course/PFTCFunctions", upgrade = FALSE)`)
+
+Some of these take a VERY long time to install from source on the Pis. It would be worth exploring installing binaries, especially for `dplyr` and `tidyr`.
+
+Run the set-up script
+---------------------
+
 The `pi_setup.R` script creates the desktop icons and associated bash scripts that start the scanner and check if the files names are valid.
 
 Edit `pi_setup.R` to set the random seed for the list of valid names (made with `PFTCFunctions::get_PFTC_envelope_codes`).
 
 So far:
 
--   Peru = 1
--   Svalbard = 32
+-   Peru 2018 = 1
+-   Svalbard 2018 = 32
 
 Save, and then run
 
@@ -84,8 +95,6 @@ If there are no errors, you can quit `R`.
 ``` r
 q(save = "no")
 ```
-
-Run the leaf icon on the desktop, and test the system works by saving a scan with a valid name.
 
 IP addresses
 ------------
@@ -107,11 +116,9 @@ Follow instructions at <https://www.raspberrypi.org/forums/viewtopic.php?t=24838
 
 whenever you launch one of the desktop icons.
 
-Run `scan leaf` desktop icon and wait for `xsane` to open. Set - the save directory to `/home/pi/Desktop/leaf_scans` (or whatever directory was set by `pi_setup.R`) - The scan type to colour - Resolution to 300
+Plug in the scanner and run the `scan leaf` desktop icon and wait for `xsane` to open. Set - the save directory to `/home/pi/Desktop/leaf_scans` (or whatever directory was set by `pi_setup.R`) - The scan type to colour - Resolution to 300
 
 Quit using the File &gt;&gt; Quit (`xsane` should then remember these settings).
-
-It is
 
 Laptop set-up
 -------------
