@@ -6,9 +6,31 @@ if(!fs::file_exists("pi_setup.Rproj")){
 
 library("glue")
 
+# function
+get_seed <- function(seed){
+  finished <- FALSE
+  while(!finished){
+    new_seed <- readline(glue("seed is {seed}\n Type integer to change or leave blank to accept"))
+    if(new_seed == ""){
+      finished <- TRUE
+    } else if(!grepl("^\\d+$", new_seed)) {
+        finished <- FALSE
+        cat(glue("seed must be an integer, not '{new_seed}\n'"))
+    }else {
+      cat("\n")
+      seed <- as.integer(new_seed)
+      finished <- FALSE
+    }
+  }
+  seed
+}
+
+
 #### configuration ####
 # set seed to get correct codes
 seed <- 1
+#ask to change seed
+seed <- get_seed(seed)
 
 # leaf scan directory
 scan_dir <- "/home/pi/Desktop/leaf_scans"
