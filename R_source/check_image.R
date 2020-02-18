@@ -1,7 +1,12 @@
 check_image <- function(pathfile, check_ij = TRUE){
+  require("glue")
+  
   scan_dir <- "REPLACE_WITH_SCAN_DIR"
   resolution <- 300
-  imageSize <- "2552x3508"
+  imageHeight <- 3508
+  imageWidth <- 2552
+  tolerance <- 20
+  
   BitsPerSample <- 8 # colour depth
   
   file <- basename(pathfile)  
@@ -20,38 +25,42 @@ check_image <- function(pathfile, check_ij = TRUE){
 
   # check extension
   if(!grepl("([^\\s]+(\\.(jpg|jpeg))$)", file, ignore.case = TRUE)){
-    stop2(paste0("File extension on ", file, " not permitted - use '.jpg'"))
+    stop2(glue("File extension on {file} not permitted - use '.jpg'"))
   }
   
   # check file name is permitted
  
   if(!grepl("^[A-Z]{3}\\d{4}\\.(jpg|jpeg)$", file, ignore.case = TRUE)){
-    stop2(paste0("File name ", file, " not expected format (3-letters, 4-numbers)"))
+    stop2(glue("File name {file} not expected format (3-letters, 4-numbers)"))
   }
   file_base <- gsub("(^[A-Z]{3}\\d{4}).*", "\\1", file)
 
   all_codes <- readRDS("envelope_codes.RDS")# import all_codes  
 
   if(!file_base %in% all_codes$hashcode){
-    stop2(paste0("File name ", file, " not in list of permitted names"))
+    stop2(glue("File name {file} not in list of permitted names"))
   }
   
 
   # check exif information is good
-  exif <- exifr::read_exif(file.path(scan_dir, file))
+  exif <- exifr::read_exif(
+    path = file.path(scan_dir, file),
+    tags = c("XResolution", "BitsPerSample", "ImageHeight", "ImageWidth"))
+  
   #correct resolution
   if(exif$XResolution != resolution | exif$YResolution != resolution){
-    stop2(paste0("Scan resolution is ", exif$XResolution, " not expected ", resolution))
+    stop2(glue("Scan resolution is {exif$XResolution} not expected {resolution}"))
   }
   
   #correct size (with tolerance)
-  if(exif$ImageSize != imageSize){
-    stop2(paste0("Scan size is ", exif$ImageSize, " pixcels not expected ", imageSize, " (A4)"))
+  if(abs(exif$ImageHeight - imageHeight) > tolerance | 
+     abs(exif$ImageWidth - imageWidth) > tolerance){
+    stop2(glue("Scan size is {exif$ImageWidth} x {exif$ImageHeight} pixels not expected {imageWidth} x {imageHeight} (A4)"))
   }
 
     #colour depth
   if(exif$BitsPerSample != BitsPerSample){
-    stop2(paste0("Colour depth is ", exif$BitsPerSample, " bits not expected ", BitsPerSample, " (full colour)"))
+    stop2(glue("Colour depth is {exif$BitsPerSample} bits not expected {BitsPerSample} (full colour)"))
   }
   
   #imagej check
