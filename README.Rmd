@@ -147,6 +147,59 @@ The VX ConnectBot by Martin Matuska allows SSH to connect to the pi as an altern
 
 Plug the phone into the pi with a USB-micro-USB cable (the phones charging cable is fine). Next, enable USB tethering in the phone's hotspot menu. This step is easy to forget - but the next step won't work without it. Now open VNC or VX ConnectBot and follow instructions. You will need the IP address.
 
-## Test and clone
+## Clone and test
 
 When everything is working, clone the SD cards (keep one SD card as backup).
+
+#### Cloning the pi (using mac, for Linux/windows see links below)
+Follow these instructions very carefully. Some advice to be careful when working in the terminal!!!
+
+Insert the sd card to a computer. Open Terminal and enter the following command to locate your SD Card:
+```{bash eval = FALSE}
+diskutil list
+```
+Check the name and the size of the different disks. The name will be something like /dev/disk2 and the size will be a little bit smaller than the max size of the sd card.
+
+In Terminal, enter the following command to create a disc image (.dmg) of your SD Card on the Desktop. You might need to enter your admin password.
+
+```{bash eval = FALSE}
+sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
+```
+
+The cloning step can take some time and the terminal does not show the progress. When the cloning is done it will give a message that the process is complete.
+
+
+#### Restoring an sd card
+
+Not sure if this step is needed!!!
+Take empty SD card. If there is still data it needs to be erased/formatted. Check out how: https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md
+
+Insert the sd card to a computer. Open Terminal and enter the following command to locate your SD Card:
+```{bash eval = FALSE}
+diskutil list
+```
+
+Unmount sd card using this command in terminal. Amend the sd card name if required.
+```{bash eval = FALSE}
+diskutil unmountDisk /dev/disk2
+```
+
+Format sd card using this command in terminal:
+```{bash eval = FALSE}
+sudo newfs_msdos -F 16 /dev/disk2
+```
+
+Restore sd card from a Cloned Disc Image
+```{bash eval = FALSE}
+sudo dd if=~/Desktop/raspberrypi.dmg of=/dev/disk2
+```
+
+Again this step can take a while (a couple of hours).
+
+#### Testing
+...
+
+Sources:
+https://www.raspberrypistarterkits.com/how-to/clone-raspberry-pi-sd-card-on-windows-linux-macos/
+https://computers.tutsplus.com/articles/how-to-clone-raspberry-pi-sd-cards-using-the-command-line-in-os-x--mac-59911
+Add Windos/linux links!!!
