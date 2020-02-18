@@ -85,18 +85,23 @@ Some of these take a VERY long time to install from source on the Pis. It would 
 
 The `pi_setup.R` script creates the desktop icons and associated bash scripts that start the scanner and check if the files names are valid. 
 
-Edit `pi_setup.R` to set the random seed for the list of valid names (made with `PFTCFunctions::get_PFTC_envelope_codes`).
-
-So far:
-
-- Peru 2018 = 1
-- Svalbard 2018 = 32
-
-Save, and then run
-
 ```{r eval = FALSE}
 source("pi_setup.R")
 ```
+
+You will be asked if you want to change the random seed that is used to generate the list of valid codes (made with `PFTCFunctions::get_PFTC_envelope_codes`).
+
+So far:
+
+```{r, eval = TRUE, echo = FALSE}
+used_seeds <- tibble::tribble(~Campaign, ~Country, ~Year, ~seed,
+                "PFTC3 & Puna", "Peru", 2018, 1,
+                "PFTC4", "Svalbard", 2018, 32, 
+                "PFTC5", "Peru", 2020, 6) 
+knitr::kable(used_seeds)
+```
+
+You will also be asked if you want to change the directory the scans are saved to.
 
 If there are no errors, you can quit `R`.
 
