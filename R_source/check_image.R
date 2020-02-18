@@ -45,11 +45,11 @@ check_image <- function(pathfile, check_ij = TRUE){
   # check exif information is good
   exif <- exifr::read_exif(
     path = file.path(scan_dir, file),
-    tags = c("XResolution", "BitsPerSample", "ImageHeight", "ImageWidth"))
+    tags = c("XResolution", "YResolution", "BitsPerSample", "ImageHeight", "ImageWidth"))
   
   #correct resolution
   if(exif$XResolution != resolution | exif$YResolution != resolution){
-    stop2(glue("Scan resolution is {exif$XResolution} not expected {resolution}"))
+    stop2(glue("Scan resolution is {exif$XResolution} (x) {exif$YResolution} (y) not expected {resolution}"))
   }
   
   #correct size (with tolerance)
