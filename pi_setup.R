@@ -6,7 +6,7 @@ if(!fs::file_exists("pi_setup.Rproj")){
 
 library("glue")
 
-# function
+# functions
 get_seed <- function(seed){
   finished <- FALSE
   while(!finished){
@@ -25,6 +25,20 @@ get_seed <- function(seed){
   seed
 }
 
+get_scan_dir <- function(scan_dir){
+  finished <- FALSE
+  while(!finished){
+    new_scan_dir <- readline(glue("scan_dir is\n {scan_dir}\n Type to change or leave blank to accept"))
+    if(new_scan_dir == ""){
+      finished <- TRUE
+    }else {
+      cat("\n")
+      scan_dir <- new_scan_dir
+      finished <- FALSE
+    }
+  }
+  scan_dir
+}
 
 #### configuration ####
 # set seed to get correct codes
@@ -34,6 +48,8 @@ seed <- get_seed(seed)
 
 # leaf scan directory
 scan_dir <- "/home/pi/Desktop/leaf_scans"
+
+scan_dir <- get_scan_dir(scan_dir)
 
 #find working directory
 wd <- getwd()
@@ -111,4 +127,17 @@ fs::file_chmod("run_filename_check.sh", mode = "u+x")
 fs::file_chmod("leaf_scan.sh", mode = "u+x")
 
 
-#### xsane config?? ####
+####code R files and replace scan_dir####
+process_code <- function(file){
+  f <- readLines(file.path("R_source", file))
+  f <- gsub("REPLACE_WITH_SCAN_DIR", scan_dir, f)
+  writeLines(f, file.path("R", file))
+}
+
+#create working code directory
+fs::dir_create("R")
+
+process_code("run_filename_check.R")
+process_code("check_image.R")
+process_code("run_check_image.R")
+

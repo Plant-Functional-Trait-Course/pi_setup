@@ -1,4 +1,5 @@
 check_image <- function(pathfile, check_ij = TRUE){
+  scan_dir <- "REPLACE_WITH_SCAN_DIR"
   resolution <- 300
   imageSize <- "2552x3508"
   BitsPerSample <- 8 # colour depth
@@ -37,7 +38,7 @@ check_image <- function(pathfile, check_ij = TRUE){
   
 
   # check exif information is good
-  exif <- exifr::read_exif(pathfile)
+  exif <- exifr::read_exif(file.path(scan_dir, file))
   #correct resolution
   if(exif$XResolution != resolution | exif$YResolution != resolution){
     stop2(paste0("Scan resolution is ", exif$XResolution, " not expected ", resolution))

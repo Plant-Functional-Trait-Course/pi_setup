@@ -1,5 +1,5 @@
 main <- function(){
-  files <- list.files(path = "~/Desktop/leaf_scans")
+  files <- list.files(path = "REPLACE_WITH_SCAN_DIR")
 
     # check extension
     wrong_extension <- !grepl("([^\\s]+(\\.(jpg|jpeg))$)", files, ignore.case = TRUE)
