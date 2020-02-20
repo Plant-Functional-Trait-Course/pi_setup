@@ -46,6 +46,9 @@ seed <- 1
 #ask to change seed
 seed <- get_seed(seed)
 
+#save used seed to file for later reference
+writeLines(as.character(seed), con = "this_seed_used.txt")
+
 # leaf scan directory
 scan_dir <- "/home/pi/Desktop/leaf_scans"
 
@@ -89,7 +92,6 @@ if(!require("PFTCFunctions")){
 }
 
 # create leaf codes
-seed <- 1
 all_codes <- get_PFTC_envelope_codes(seed = seed)
 saveRDS(all_codes, file = "envelope_codes.RDS")
 
