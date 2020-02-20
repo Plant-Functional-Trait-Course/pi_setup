@@ -146,7 +146,7 @@ Clone and test
 
 When everything is working, clone the SD cards (keep one SD card as backup).
 
-#### Cloning the pi (using mac, for Linux/windows see links below)
+### Cloning the pi (using mac, for Linux/windows see links below)
 
 Follow these instructions very carefully. Some advice to be careful when working in the terminal!!!
 
@@ -166,9 +166,9 @@ sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
 
 The cloning step can take some time and the terminal does not show the progress. When the cloning is done it will give a message that the process is complete.
 
-#### Restoring an sd card
+### Restoring an sd card
 
-Not sure if this step is needed!!! Take empty SD card. If there is still data it needs to be erased/formatted. Check out how: <https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
+Take empty SD card or reformat it. Here are some instructions how to do this:<https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
 
 Insert the sd card to a computer. Open Terminal and enter the following command to locate your SD Card:
 
@@ -196,8 +196,15 @@ sudo dd if=~/Desktop/raspberrypi.dmg of=/dev/disk2
 
 Again this step can take a while (a couple of hours).
 
-#### Testing
+### Testing
 
-...
+Start up the raspberry pi and test if the cloned pi is working.
 
-Sources: <https://www.raspberrypistarterkits.com/how-to/clone-raspberry-pi-sd-card-on-windows-linux-macos/> <https://computers.tutsplus.com/articles/how-to-clone-raspberry-pi-sd-cards-using-the-command-line-in-os-x--mac-59911> Add Windos/linux links!!!
+
+#### Sources
+How to clone raspberry pi (only tested on mac)
+<https://computers.tutsplus.com/articles/how-to-clone-raspberry-pi-sd-cards-using-the-command-line-in-os-x--mac-59911>
+<https://www.raspberrypistarterkits.com/how-to/clone-raspberry-pi-sd-card-on-windows-linux-macos/> 
+
+How to back up and restore pi (only mac version has been tested)
+https://thepihut.com/blogs/raspberry-pi-tutorials/17789160-backing-up-and-restoring-your-raspberry-pis-sd-card
