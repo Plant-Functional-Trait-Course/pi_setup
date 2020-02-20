@@ -148,15 +148,15 @@ When everything is working, clone the SD cards (keep one SD card as backup).
 
 ### Cloning the pi (using mac, for Linux/windows see links below)
 
-Follow these instructions very carefully. Some advice to be careful when working in the terminal!!!
+Follow these instructions very carefully. Some advice to be careful when working in the terminal!
 
-Insert the sd card to a computer. Open Terminal and enter the following command to locate your SD Card:
+Insert the SD card to a computer. Open Terminal and enter the following command to locate your SD Card:
 
 ``` bash
 diskutil list
 ```
 
-Check the name and the size of the different disks. The name will be something like /dev/disk2 and the size will be a little bit smaller than the max size of the sd card.
+Check the name and the size of the different disks. The name will be something like `/dev/disk2` and the size will be a little bit smaller than the max size of the sd card.
 
 In Terminal, enter the following command to create a disc image (.dmg) of your SD Card on the Desktop. You might need to enter your admin password.
 
@@ -168,7 +168,7 @@ The cloning step can take some time and the terminal does not show the progress.
 
 ### Restoring an sd card
 
-Take empty SD card or reformat it. Here are some instructions how to do this:<https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
+Take empty SD card or reformat it. Here are some instructions how to do this: <https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
 
 Insert the sd card to a computer. Open Terminal and enter the following command to locate your SD Card:
 
@@ -200,11 +200,8 @@ Again this step can take a while (a couple of hours).
 
 Start up the raspberry pi and test if the cloned pi is working.
 
-
 #### Sources
-How to clone raspberry pi (only tested on mac)
-<https://computers.tutsplus.com/articles/how-to-clone-raspberry-pi-sd-cards-using-the-command-line-in-os-x--mac-59911>
-<https://www.raspberrypistarterkits.com/how-to/clone-raspberry-pi-sd-card-on-windows-linux-macos/> 
 
-How to back up and restore pi (only mac version has been tested)
-https://thepihut.com/blogs/raspberry-pi-tutorials/17789160-backing-up-and-restoring-your-raspberry-pis-sd-card
+How to clone raspberry pi (only tested on mac) <https://computers.tutsplus.com/articles/how-to-clone-raspberry-pi-sd-cards-using-the-command-line-in-os-x--mac-59911> <https://www.raspberrypistarterkits.com/how-to/clone-raspberry-pi-sd-card-on-windows-linux-macos/>
+
+How to back up and restore pi (only mac version has been tested) <https://thepihut.com/blogs/raspberry-pi-tutorials/17789160-backing-up-and-restoring-your-raspberry-pis-sd-card>
