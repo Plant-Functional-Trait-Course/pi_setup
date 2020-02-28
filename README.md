@@ -70,7 +70,7 @@ Install the following packages
 -   `remotes`
 -   `PFTCFunctions` (with `remotes::install_github("Plant-Functional-Trait-Course/PFTCFunctions", upgrade = FALSE)`)
 
-Some of these take a VERY long time to install from source on the Pis. It would be worth exploring installing binaries, especially for `dplyr` and `tidyr`.
+Some of these take a **VERY** long time to install from source on the Pis. It would be worth exploring installing binaries, especially for `dplyr` and `tidyr`.
 
 Run the set-up script
 ---------------------
@@ -102,13 +102,15 @@ q(save = "no")
 IP addresses
 ------------
 
-Set static ethernet and USB IP address (this might cause conflicts if you are using ethernet to connect to the internet, but is very convenient when using VNC to connect to laptops (ethernet) or phone (USB).
+Set static USB IP address. This is very convenient when using VNC to connect to a phone (USB).
 
 Right click on the wifi icon at the top left of the screen, then select Wireless & Wired Network Services.
 
-In the menu, select `eth0` in the top right drop-down box, then write in the desired IPv4 Address. IPv4 address should have a format like `192.168.42.42`. Repeat for `usb0` (you will probably need a phone connected by usb to see this option).
+With a phone connected by usb (make sure the usb-tethering is set-up on the phone), you can select `usb0` in the top right drop-down box, then write in the desired IPv4 Address. IPv4 address should have a format like `192.168.42.42`.
 
-Setting static IP adress might make it difficult to connect to a ethernet network.
+It ought to be possible to set the `eth0` IP address in the same way to connect to a laptop via ethernet, but we have not managed to get that to work.
+
+To find the ethernet IP address, connect a laptop via an ethernet cable and, in the terminal, type `ifconfig`. A section of the output will refer to `eth0` and should have the IP address. This address seems to be stable.
 
 Details
 -------
