@@ -1,7 +1,6 @@
 check_image <- function(pathfile, check_ij = TRUE){
   require("glue")
   
-  scan_dir <- "REPLACE_WITH_SCAN_DIR"
   resolution <- 300
   imageHeight <- 3508
   imageWidth <- 2552
@@ -44,7 +43,7 @@ check_image <- function(pathfile, check_ij = TRUE){
 
   # check exif information is good
   exif <- exifr::read_exif(
-    path = file.path(scan_dir, file),
+    path = pathfile,
     tags = c("XResolution", "YResolution", "BitsPerSample", "ImageHeight", "ImageWidth"))
   
   #correct resolution
