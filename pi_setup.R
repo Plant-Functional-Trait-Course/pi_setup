@@ -114,7 +114,7 @@ change_seed.sh <- glue("#!/bin/sh
 cd {wd}
 
 Rscript R/change_seed.R
-done ")
+")
 
 writeLines(change_seed.sh, con = "change_seed.sh")
 
