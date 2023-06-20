@@ -111,7 +111,7 @@ writeLines(leaf_scan.sh, con = "leaf_scan.sh")
 
 # change_seed.r
 # to use this script, on the command line run
-# .\change_seed.r
+# ./change_seed.r
 
 change_seed.r <- "#!/usr/bin/env Rscript
 
