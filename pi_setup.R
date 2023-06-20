@@ -110,10 +110,24 @@ done ")
 writeLines(leaf_scan.sh, con = "leaf_scan.sh")
 
 # change_seed.sh
-change_seed.sh <- glue("#!/bin/sh
-cd {wd}
+change_seed.sh <- glue("#!/usr/bin/env Rscript
 
-Rscript R/change_seed.R
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args != 1)) {
+  stop(\"expecting a single argument\")
+}
+seed <- args[1L]
+if (grepl(\"\\\\D\", seed)) {
+  stop(\"argument must be an interger not: \", seed)
+}
+
+  #save used seed to file for later reference
+  writeLines(as.character(seed), con = \"this_seed_used.txt\")
+  
+  
+ # create leaf codes
+  all_codes <- PFTCFunctions::get_PFTC_envelope_codes(seed = seed)
+  saveRDS(all_codes, file = \"envelope_codes.RDS\")
 ")
 
 writeLines(change_seed.sh, con = "change_seed.sh")
@@ -138,4 +152,3 @@ fs::dir_create("R")
 process_code("run_filename_check.R")
 process_code("check_image.R")
 process_code("run_check_image.R")
-process_code("change_seed.R")
