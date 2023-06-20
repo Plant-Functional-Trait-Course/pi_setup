@@ -109,6 +109,16 @@ If there are no errors, you can quit `R`.
 q(save = "no")
 ```
 
+### Changing the seed
+
+If you want to change the seed, from the terminal, run
+
+```{bash, eval = FALSE}
+./change_seed.r 1234
+```
+
+Where 1234 is the new seed.
+
 ## IP addresses
 
 Set static USB IP address. This is very convenient when using VNC to connect to a phone (USB).
