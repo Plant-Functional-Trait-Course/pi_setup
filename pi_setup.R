@@ -110,7 +110,7 @@ done ")
 writeLines(leaf_scan.sh, con = "leaf_scan.sh")
 
 # change_seed.sh
-change_seed.sh <- glue("#!/usr/bin/env Rscript
+change_seed.sh <- "#!/usr/bin/env Rscript
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args != 1)) {
@@ -128,7 +128,7 @@ if (grepl(\"\\\\D\", seed)) {
  # create leaf codes
   all_codes <- PFTCFunctions::get_PFTC_envelope_codes(seed = seed)
   saveRDS(all_codes, file = \"envelope_codes.RDS\")
-")
+"
 
 writeLines(change_seed.sh, con = "change_seed.sh")
 
