@@ -109,13 +109,18 @@ done ")
 
 writeLines(leaf_scan.sh, con = "leaf_scan.sh")
 
-# change_seed.sh
-change_seed.sh <- "#!/usr/bin/env Rscript
+# change_seed.r
+# to use this script, on the command line run
+# .\change_seed.r
+
+change_seed.r <- "#!/usr/bin/env Rscript
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args != 1)) {
+
+if (length(args) != 1) {
   stop(\"expecting a single argument\")
 }
+
 seed <- args[1L]
 if (grepl(\"\\\\D\", seed)) {
   stop(\"argument must be an interger not: \", seed)
@@ -130,13 +135,13 @@ if (grepl(\"\\\\D\", seed)) {
   saveRDS(all_codes, file = \"envelope_codes.RDS\")
 "
 
-writeLines(change_seed.sh, con = "change_seed.sh")
+writeLines(change_seed.r, con = "change_seed.r")
 
 
 # set permissions
 fs::file_chmod("run_filename_check.sh", mode = "u+x")
 fs::file_chmod("leaf_scan.sh", mode = "u+x")
-fs::file_chmod("change_seed.sh", mode = "u+x")
+fs::file_chmod("change_seed.r", mode = "u+x")
 
 
 #### code R files and replace scan_dir####
