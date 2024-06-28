@@ -39,6 +39,13 @@ seed <- get_seed(seed)
 # save used seed to file for later reference
 writeLines(as.character(seed), con = "this_seed_used.txt")
 
+# ask to change prefix
+prefix <- get_prefix()
+
+# save used seed to file for later reference
+writeLines(prefix, con = "this_prefix_used.txt")
+
+
 # leaf scan directory
 scan_dir <- "/home/pi/Desktop/leaf_scans"
 
@@ -77,7 +84,7 @@ writeLines(name_check_desktop, con = "/home/pi/Desktop/name_check.desktop")
 #### create leaf codes ####
 
 # create leaf codes
-all_codes <- get_PFTC_envelope_codes(seed = seed)
+all_codes <- get_PFTC_envelope_codes(prefix = prefix, seed = seed)
 saveRDS(all_codes, file = "envelope_codes.RDS")
 
 #### create save directory for scans ####
@@ -117,8 +124,8 @@ change_seed.r <- "#!/usr/bin/env Rscript
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) != 1) {
-  stop(\"expecting a single argument\")
+if (length(args) > 0 && length(args) < 2) {
+  stop(\"expecting a one (seed)  or two (seed and prefix) arguments\")
 }
 
 seed <- args[1L]
@@ -128,10 +135,16 @@ if (grepl(\"\\\\D\", seed)) {
 
   #save used seed to file for later reference
   writeLines(as.character(seed), con = \"this_seed_used.txt\")
-  
+ 
+ if (length(args)) { 
+   prefix <- args[2L]
+
+    #save used prefix to file for later reference
+    writeLines(prefix, con = \"this_prefix_used.txt\")
+ }
   
  # create leaf codes
-  all_codes <- PFTCFunctions::get_PFTC_envelope_codes(seed = seed)
+  all_codes <- PFTCFunctions::get_PFTC_envelope_codes(prefix = prefix, seed = seed)
   saveRDS(all_codes, file = \"envelope_codes.RDS\")
 "
 
